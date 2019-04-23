@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/RxJavaDemo.iml" filepath="$PROJECT_DIR$/.idea/RxJavaDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/RxJavaDemo.iml" filepath="$PROJECT_DIR$/RxJavaDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-demonstrate/library-demonstrate.iml" filepath="$PROJECT_DIR$/library-demonstrate/library-demonstrate.iml" />
       <module fileurl="file://$PROJECT_DIR$/library-demonstrate/library-demonstrate.iml" filepath="$PROJECT_DIR$/library-demonstrate/library-demonstrate.iml" />
     </modules>
   </component>

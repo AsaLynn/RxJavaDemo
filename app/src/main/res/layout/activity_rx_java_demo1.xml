@@ -18,25 +18,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="链式发送" />
+
     <Button
         android:id="@+id/btn_send3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发送中切断水管" />
+
     <Button
         android:id="@+id/btn_send4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发送只处理onNext事件" />
+
     <Button
         android:id="@+id/btn_send5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Observable的其他操作" />
+
     <Button
         android:id="@+id/btn_send6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="rxjava的操作符使用" />
+
+    <Button
+        android:id="@+id/btn_send_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rxjava的定时轮训操作" />
 
 </LinearLayout>

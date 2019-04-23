@@ -54,8 +54,14 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
             test5();//几种被观察者的创建方式
         } else if (view.getId() == R.id.btn_send6) {
             test6();//常用的操作符
+        } else if (view.getId() == R.id.btn_send_test) {
+            //发送练习1
+            RxJavaDemo4Activity.jumpTo(this);
         }
+
     }
+
+
 
     private void test6() {
         DialogUtil.showListDialog(this, "rxjava的操作符号使用", new String[]{
@@ -625,5 +631,6 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
         btnSend5.setOnClickListener(RxJavaDemo1Activity.this);
         btnSend6 = (Button) findViewById(R.id.btn_send6);
         btnSend6.setOnClickListener(RxJavaDemo1Activity.this);
+        findViewById(R.id.btn_send_test).setOnClickListener(RxJavaDemo1Activity.this);
     }
 }
