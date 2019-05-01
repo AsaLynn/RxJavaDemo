@@ -24,6 +24,8 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 
+import static io.reactivex.Observable.fromIterable;
+
 public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnClickListener {
 
     protected Button btnSend1;
@@ -70,6 +72,7 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
                 "2filter()操作符",
                 "3take()操作符",
                 "4doOnNext()操作符",
+                "5flatMap()操作符转换集合",
         }, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -89,22 +92,49 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
                     case 4:
                         map4();
                         break;
+                    case 5:
+                        map5();
+                        break;
                 }
             }
         });
     }
 
+    private void map5() {
+        ArrayList<Integer> item = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            item.add(0);
+        }
+
+        Observable
+                .just(item)
+                .flatMap(new Function<List<Integer>, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource apply(List<Integer> integers) throws Exception {
+                        Observable<Integer> iterable = Observable.fromIterable(integers);
+                        return iterable;
+                    }
+                }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                DemonstrateUtil.showLogResult(s.toString());
+            }
+        });
+
+
+    }
+
     private void map4() {
-        Observable.just(new ArrayList<String>(){
+        Observable.just(new ArrayList<String>() {
             {
                 for (int i = 0; i < 6; i++) {
-                    add("data"+i);
+                    add("data" + i);
                 }
             }
         }).flatMap(new Function<List<String>, ObservableSource<?>>() {
             @Override
             public ObservableSource<?> apply(List<String> strings) throws Exception {
-                return Observable.fromIterable(strings);
+                return fromIterable(strings);
             }
         }).take(5).doOnNext(new Consumer<Object>() {
             @Override
@@ -120,16 +150,16 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
     }
 
     private void map3() {
-        Observable.just(new ArrayList<String>(){
+        Observable.just(new ArrayList<String>() {
             {
                 for (int i = 0; i < 8; i++) {
-                    add("data"+i);
+                    add("data" + i);
                 }
             }
         }).flatMap(new Function<List<String>, ObservableSource<?>>() {
             @Override
             public ObservableSource<?> apply(List<String> strings) throws Exception {
-                return Observable.fromIterable(strings);
+                return fromIterable(strings);
             }
         }).take(10).subscribe(new Consumer<Object>() {
             @Override
@@ -141,23 +171,23 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
 
     private void map2() {
         Observable
-                .just(new ArrayList<String>(){
+                .just(new ArrayList<String>() {
                     {
                         for (int i = 0; i < 5; i++) {
-                            add("data"+i);
+                            add("data" + i);
                         }
                     }
                 })
                 .flatMap(new Function<List<String>, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(List<String> strings) throws Exception {
-                        return Observable.fromIterable(strings);
+                        return fromIterable(strings);
                     }
                 }).filter(new Predicate<Object>() {
             @Override
             public boolean test(Object s) throws Exception {
                 String newStr = (String) s;
-                if (newStr.contains("3")){
+                if (newStr.contains("3")) {
                     return true;
                 }
                 return false;
@@ -165,22 +195,22 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
         }).subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-                DemonstrateUtil.showLogResult((String)o);
+                DemonstrateUtil.showLogResult((String) o);
             }
         });
     }
 
     private void map1() {
-        Observable.just(new ArrayList<String>(){
+        Observable.just(new ArrayList<String>() {
             {
                 for (int i = 0; i < 3; i++) {
-                    add("data"+i);
+                    add("data" + i);
                 }
             }
         }).flatMap(new Function<List<String>, ObservableSource<?>>() {
             @Override
             public ObservableSource<?> apply(List<String> strings) throws Exception {
-                return Observable.fromIterable(strings);
+                return fromIterable(strings);
             }
         }).subscribe(new Observer<Object>() {
             @Override
@@ -190,7 +220,7 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onNext(Object o) {
-                DemonstrateUtil.showLogResult("flatMap转换后,接收到的"+o);
+                DemonstrateUtil.showLogResult("flatMap转换后,接收到的" + o);
             }
 
             @Override
@@ -220,7 +250,7 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onNext(Integer integer) {
-                DemonstrateUtil.showLogResult("接收到被转换的数据结果:"+integer);
+                DemonstrateUtil.showLogResult("接收到被转换的数据结果:" + integer);
             }
 
             @Override
@@ -405,7 +435,7 @@ public class RxJavaDemo1Activity extends AppCompatActivity implements View.OnCli
     }
 
     private void other1() {
-        Observable.fromIterable(new ArrayList<String>() {
+        fromIterable(new ArrayList<String>() {
             {
                 for (int i = 0; i < 5; i++) {
                     add("Hello," + i);
